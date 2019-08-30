@@ -1,0 +1,13 @@
+C:\Users\reach\source\repos\Verdant.Zero.Erp\Verdant.Zero.Erp.Api\obj\Debug\netcoreapp2.2\Verdant.Zero.Erp.Api.csproj.CoreCompileInputs.cache
+C:\Users\reach\source\repos\Verdant.Zero.Erp\Verdant.Zero.Erp.Api\obj\Debug\netcoreapp2.2\Verdant.Zero.Erp.Api.AssemblyInfoInputs.cache
+C:\Users\reach\source\repos\Verdant.Zero.Erp\Verdant.Zero.Erp.Api\obj\Debug\netcoreapp2.2\Verdant.Zero.Erp.Api.AssemblyInfo.cs
+C:\Users\reach\source\repos\Verdant.Zero.Erp\Verdant.Zero.Erp.Api\bin\Debug\netcoreapp2.2\Verdant.Zero.Erp.Api.deps.json
+C:\Users\reach\source\repos\Verdant.Zero.Erp\Verdant.Zero.Erp.Api\bin\Debug\netcoreapp2.2\Verdant.Zero.Erp.Api.runtimeconfig.json
+C:\Users\reach\source\repos\Verdant.Zero.Erp\Verdant.Zero.Erp.Api\bin\Debug\netcoreapp2.2\Verdant.Zero.Erp.Api.runtimeconfig.dev.json
+C:\Users\reach\source\repos\Verdant.Zero.Erp\Verdant.Zero.Erp.Api\bin\Debug\netcoreapp2.2\Verdant.Zero.Erp.Api.dll
+C:\Users\reach\source\repos\Verdant.Zero.Erp\Verdant.Zero.Erp.Api\obj\Debug\netcoreapp2.2\Verdant.Zero.Erp.Api.RazorAssemblyInfo.cache
+C:\Users\reach\source\repos\Verdant.Zero.Erp\Verdant.Zero.Erp.Api\obj\Debug\netcoreapp2.2\Verdant.Zero.Erp.Api.RazorAssemblyInfo.cs
+C:\Users\reach\source\repos\Verdant.Zero.Erp\Verdant.Zero.Erp.Api\obj\Debug\netcoreapp2.2\Verdant.Zero.Erp.Api.RazorTargetAssemblyInfo.cache
+C:\Users\reach\source\repos\Verdant.Zero.Erp\Verdant.Zero.Erp.Api\bin\Debug\netcoreapp2.2\Verdant.Zero.Erp.Api.pdb
+C:\Users\reach\source\repos\Verdant.Zero.Erp\Verdant.Zero.Erp.Api\obj\Debug\netcoreapp2.2\Verdant.Zero.Erp.Api.dll
+C:\Users\reach\source\repos\Verdant.Zero.Erp\Verdant.Zero.Erp.Api\obj\Debug\netcoreapp2.2\Verdant.Zero.Erp.Api.pdb
