@@ -2,15 +2,17 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Verdant.Zero.Erp.Api.Data.EntityFramework;
 
 namespace Verdant.Zero.Erp.Api.EntityFramework.Migrations
 {
     [DbContext(typeof(ZeroErpManagementDatabase))]
-    partial class ZeroErpManagementDatabaseModelSnapshot : ModelSnapshot
+    [Migration("20190904144021_001")]
+    partial class _001
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

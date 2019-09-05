@@ -7,7 +7,7 @@ namespace Verdant.Zero.Erp.Api.Transformation
 {
     public class ListDataTransformation
     {
-        public string CustomerName { get; set; }
+        public string SearchText { get; set; }
         public int CurrentPageNumber { get; set; }
         public int PageSize { get; set; }
         public string SortDirection { get; set; }

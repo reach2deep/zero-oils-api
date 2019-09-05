@@ -13,10 +13,13 @@ namespace Verdant.Zero.Erp.Api.Data.EntityFramework
     {
         private string _connectionString;
 
-        public DbSet<Customer> Customers { get; set; }
+        //public DbSet<Customer> Customers { get; set; }
         public DbSet<User> Users { get; set; }
         public DbSet<Account> Accounts { get; set; }
         public DbSet<UserType> UserTypes { get; set; }
+        public DbSet<Contact> Contacts { get; set; }
+        public DbSet<Address> Addresses { get; set; }
+        public DbSet<TaxAndPaymentDetails> TaxAndPayments { get; set; }
 
 
         public ZeroErpManagementDatabase(DbContextOptions<ZeroErpManagementDatabase> options) : base(options) {
@@ -52,6 +55,20 @@ namespace Verdant.Zero.Erp.Api.Data.EntityFramework
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<User>().HasIndex(u => u.EmailAddress).IsUnique();
+
+            //modelBuilder.Entity<Match>()
+            //       .HasRequired(m => m.HomeTeam)
+            //       .WithMany(t => t.HomeMatches)
+            //       .HasForeignKey(m => m.HomeTeamId)
+            //       .WillCascadeOnDelete(false);
+
+            //modelBuilder.Entity<Match>()
+            //            .HasRequired(m => m.GuestTeam)
+            //            .WithMany(t => t.AwayMatches)
+            //            .HasForeignKey(m => m.GuestTeamId)
+            //            .WillCascadeOnDelete(false);
+
+
 
         }
     }

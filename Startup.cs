@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Text;
+using AutoMapper;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Cors.Infrastructure;
@@ -66,10 +63,10 @@ namespace Verdant.Zero.Erp.Api
 
             services.AddDbContext<ZeroErpManagementDatabase>(options => options.UseMySQL(Configuration.GetConnectionString("PrimaryDatabaseConnectionString")));
 
-            // Customer
-            services.AddTransient<ICustomerManagementDataService, ZeroErpManagementDataService>();
-            services.AddTransient<ICustomerManagementBusinessService>(provider => 
-            new CustomerManagementBusinessService(provider.GetRequiredService<ICustomerManagementDataService>(), connectionStrings));
+            // Contact
+            services.AddTransient<IContactManagementDataService, ZeroErpManagementDataService>();
+            services.AddTransient<IContactManagementBusinessService>(provider => 
+            new ContactManagementBusinessService(provider.GetRequiredService<IContactManagementDataService>(), connectionStrings, provider.GetRequiredService<IMapper>()));
 
             // Account
             services.AddTransient<IAccountManagementDataService, AccountManagementDataService>();
@@ -90,8 +87,15 @@ namespace Verdant.Zero.Erp.Api
                 };
             });
 
-            services.AddScoped<SecurityFilter>();
 
+            // Start Registering and Initializing AutoMapper
+
+            
+            services.AddAutoMapper(typeof(Startup));
+
+            services.AddScoped<SecurityFilter>();
+            //services.AddAutoMapper(typeof(Startup));
+            
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
         }

@@ -3,61 +3,79 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Verdant.Zero.Erp.Api.DataModel.Entities;
 using Verdant.Zero.Erp.Api.Interfaces;
 using Verdant.Zero.Erp.Api.Model;
 
 namespace Verdant.Zero.Erp.Api.Data.EntityFramework
 {
-    public class ZeroErpManagementDataService : EntityFrameworkRepository, ICustomerManagementDataService
+    public class ZeroErpManagementDataService : EntityFrameworkRepository, IContactManagementDataService
     {
        
         /// <summary>
-        /// Create Customer
+        /// Create Contact
         /// </summary>
-        /// <param name="customer"></param>
+        /// <param name="contact"></param>
         /// <returns></returns>
-        public async Task CreateCustomer(Customer customer)
+        public async Task CreateContact(Contact contact)
         {
             DateTime dateCreated = DateTime.UtcNow;
-            customer.DateCreated = dateCreated;
-            customer.DateUpdated = dateCreated;
+            contact.UpdatedAt = dateCreated;
+            contact.CreatedAt = dateCreated;
+            if (contact.BillingAddress != null)
+                contact.BillingAddress.CreatedAt = dateCreated;
+            if (contact.ShippingAddress != null)
+                contact.ShippingAddress.CreatedAt = dateCreated;
 
-            await dbConnection.Customers.AddAsync(customer);
+            await dbConnection.Contacts.AddAsync(contact);
 
         }
 
-        public Task<List<Customer>> CustomerInquiry(int accountId, string customerName, DataGridPagingInformation paging)
+        public async Task UpdateContact(Contact contact)
+        {
+            await Task.Delay(0);
+            DateTime dateUpdated = DateTime.UtcNow;
+            contact.UpdatedAt = dateUpdated;
+
+            if (contact.BillingAddress != null)
+                contact.BillingAddress.UpdatedAt = dateUpdated;
+            if (contact.ShippingAddress != null)
+                contact.ShippingAddress.UpdatedAt = dateUpdated;
+            
+        }
+
+        public Task<List<Contact>> ContactInquiry(int accountId, string contactName, DataGridPagingInformation paging)
         {
             throw new NotImplementedException();
         }
 
 
         /// <summary>
-        /// Get Customer Information
+        /// Get Contact Information
         /// </summary>
         /// <param name="accountId"></param>
-        /// <param name="customerId"></param>
+        /// <param name="contactId"></param>
         /// <returns></returns>
-        public async Task<Customer> GetCustomerInformation(int accountId, int customerId)
+        public async Task<Contact> GetContactInformation(int accountId, int contactId)
         {
-            Customer customer = await dbConnection.Customers.Where(x => x.CustomerId == customerId && x.AccountId == accountId).FirstOrDefaultAsync();
-            return customer;
+            Contact contact = await dbConnection.Contacts.Where(x => x.ContactId == contactId).FirstOrDefaultAsync();
+            return contact;
         }
 
-        public async Task<Customer> GetCustomerInformationByCustomerName(string customerName, int accountId)
+        public async Task<Contact> GetContactInformationByContactName(string contactName, int accountId)
         {
-            Customer customer = await dbConnection.Customers.Where(x => x.Name == customerName && x.AccountId == accountId).FirstOrDefaultAsync();
-            return customer;
+            Contact contact = await dbConnection.Contacts.Where(x => x.FirstName == contactName).FirstOrDefaultAsync();
+            return contact;
         }
 
-        public async Task<List<Customer>> GetCustomers(int accountId, string customerName, DataGridPagingInformation paging)
+        public async Task<List<Contact>> GetContacts(int accountId, string contactName, DataGridPagingInformation paging)
         {
             string sortExpression = paging.SortExpression;
             string sortDirection = paging.SortDirection;
 
             if (string.IsNullOrEmpty(sortExpression))
             {
-                sortExpression = "Name";
+                sortExpression = "FirstName";
             }
 
             if (paging.SortDirection != string.Empty)
@@ -65,25 +83,25 @@ namespace Verdant.Zero.Erp.Api.Data.EntityFramework
 
             int numberOfRows = 0;
 
-            var query = dbConnection.Customers.AsQueryable();
+            var query = dbConnection.Contacts.AsQueryable();
 
-            if (customerName.Trim().Length > 0)
+            if (contactName.Trim().Length > 0)
             {
-                query = query.Where(p => p.Name.Contains(customerName));
+                query = query.Where(p => p.FirstName.Contains(contactName));
             }
 
             //query = query.Where(p => p.AccountId == accountId);
 
-            var customerResults = from p in query select p;
+            var contactResults = from p in query select p;
 
-            numberOfRows = await customerResults.CountAsync();
+            numberOfRows = await contactResults.CountAsync();
 
-            List<Customer> customers = await customerResults.Skip((paging.CurrentPageNumber - 1) * paging.PageSize).Take(paging.PageSize).ToListAsync();
+            List<Contact> contacts = await contactResults.Skip((paging.CurrentPageNumber - 1) * paging.PageSize).Take(paging.PageSize).ToListAsync();
 
             paging.TotalRows = numberOfRows;
             paging.TotalPages = Utilities.Functions.CalculateTotalPages(numberOfRows, paging.PageSize);
 
-            return customers;
+            return contacts;
         }
     }
 }
