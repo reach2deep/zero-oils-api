@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
+using Verdant.Zero.Erp.Api.DataModel.Entities;
 
 namespace Verdant.Zero.Erp.Api.Controllers
 {
@@ -12,10 +15,48 @@ namespace Verdant.Zero.Erp.Api.Controllers
     {
         // GET api/values
         [HttpGet]
-        public ActionResult<IEnumerable<string>> Get()
+        public ActionResult<string> Get()
         {
-            return new string[] { "value1", "value2" };
+           // string result = string.Empty;
+
+            var product = new Product();
+            product.Dimension = new Dimension();
+            product.SalesInformation = new SalesInformation();
+            product.PurchaseInformation = new PurchaseInformation();
+            product.InventoryAccount = new InventoryAccount();
+
+            DefaultContractResolver contractResolver = new DefaultContractResolver
+            {
+                NamingStrategy = new SnakeCaseNamingStrategy()
+            };
+
+            string json = JsonConvert.SerializeObject(product, new JsonSerializerSettings
+            {
+                ContractResolver = contractResolver,
+                Formatting = Formatting.Indented
+            });
+
+            json = json.Replace("\"", "");
+
+           /// result = JsonConvert.SerializeObject(product, Formatting.Indented);
+            return json;
         }
+
+        //[HttpGet]
+        //public ActionResult<string> ConvertToJson()
+        //{
+        //    string result = string.Empty;
+
+        //    var product = new Product();
+        //    product.Dimension = new Dimension();
+        //    product.SalesInformation = new SalesInformation();
+        //    product.PurchaseInformation = new PurchaseInformation();
+        //    product.InventoryAccount = new InventoryAccount();
+
+        //    result = JsonConvert.SerializeObject(product, Formatting.Indented);
+        //    return result;
+        //    //return new string[] { "value1", "value2" };
+        //}
 
         // GET api/values/5
         [HttpGet("{id}")]

@@ -20,6 +20,9 @@ namespace Verdant.Zero.Erp.Api.Data.EntityFramework
         public DbSet<Contact> Contacts { get; set; }
         public DbSet<Address> Addresses { get; set; }
         public DbSet<TaxAndPaymentDetails> TaxAndPayments { get; set; }
+        public DbSet<Product> Products { get; set; }
+        public DbSet<Inventory> Inventories { get; set; }
+
 
 
         public ZeroErpManagementDatabase(DbContextOptions<ZeroErpManagementDatabase> options) : base(options) {
@@ -40,8 +43,10 @@ namespace Verdant.Zero.Erp.Api.Data.EntityFramework
             Console.WriteLine("Connecting to Database = " + _connectionString);
             if (string.IsNullOrWhiteSpace(_connectionString))
             {
+                Console.WriteLine("Available Connecting to Database = " + _connectionString);
                 ConnectionStrings connectionStrings = ConfigurationUtility.GetConnectionStrings();
                 string databaseConnectionString = connectionStrings.PrimaryDatabaseConnectionString;
+                Console.WriteLine("Using Database = " + _connectionString);
                 optionsBuilder.UseMySQL(databaseConnectionString);
             }
             else
@@ -55,6 +60,12 @@ namespace Verdant.Zero.Erp.Api.Data.EntityFramework
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<User>().HasIndex(u => u.EmailAddress).IsUnique();
+
+            //Product
+            modelBuilder.Entity<Product>().OwnsOne(p => p.Dimension);
+            modelBuilder.Entity<Product>().OwnsOne(p => p.SalesInformation);
+            modelBuilder.Entity<Product>().OwnsOne(p => p.PurchaseInformation);
+            modelBuilder.Entity<Product>().OwnsOne(p => p.InventoryAccount);
 
             //modelBuilder.Entity<Match>()
             //       .HasRequired(m => m.HomeTeam)

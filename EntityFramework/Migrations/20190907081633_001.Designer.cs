@@ -9,7 +9,7 @@ using Verdant.Zero.Erp.Api.Data.EntityFramework;
 namespace Verdant.Zero.Erp.Api.EntityFramework.Migrations
 {
     [DbContext(typeof(ZeroErpManagementDatabase))]
-    [Migration("20190904144021_001")]
+    [Migration("20190907081633_001")]
     partial class _001
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -126,6 +126,75 @@ namespace Verdant.Zero.Erp.Api.EntityFramework.Migrations
                     b.ToTable("Contacts");
                 });
 
+            modelBuilder.Entity("Verdant.Zero.Erp.Api.DataModel.Entities.Inventory", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<double>("AccountingCommittedStock");
+
+                    b.Property<double>("AccountingStockAvailForSale");
+
+                    b.Property<double>("AccountingStockOnHand");
+
+                    b.Property<double>("PhysicalCommittedStock");
+
+                    b.Property<double>("PhysicalStockAvailForSale");
+
+                    b.Property<double>("PhysicalStockOnHand");
+
+                    b.Property<int>("ProductCode");
+
+                    b.Property<string>("WarehouseCode");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Inventories");
+                });
+
+            modelBuilder.Entity("Verdant.Zero.Erp.Api.DataModel.Entities.Product", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Brand");
+
+                    b.Property<DateTime>("CreatedAt");
+
+                    b.Property<string>("CreatedBy");
+
+                    b.Property<string>("Ean");
+
+                    b.Property<string>("ImagePath");
+
+                    b.Property<byte>("IsReturnable")
+                        .HasColumnType("TINYINT(1)");
+
+                    b.Property<string>("Isbn");
+
+                    b.Property<string>("ItemType");
+
+                    b.Property<string>("Manufacturer");
+
+                    b.Property<string>("Mpn");
+
+                    b.Property<string>("Name");
+
+                    b.Property<string>("Sku");
+
+                    b.Property<string>("Uom");
+
+                    b.Property<string>("Upc");
+
+                    b.Property<DateTime>("UpdatedAt");
+
+                    b.Property<string>("UpdatedBy");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Products");
+                });
+
             modelBuilder.Entity("Verdant.Zero.Erp.Api.DataModel.Entities.TaxAndPaymentDetails", b =>
                 {
                     b.Property<int?>("TaxAndPaymentId")
@@ -202,6 +271,91 @@ namespace Verdant.Zero.Erp.Api.EntityFramework.Migrations
                     b.HasOne("Verdant.Zero.Erp.Api.DataModel.Entities.TaxAndPaymentDetails", "TaxAndPaymentDetail")
                         .WithMany()
                         .HasForeignKey("TaxAndPaymentDetailTaxAndPaymentId");
+                });
+
+            modelBuilder.Entity("Verdant.Zero.Erp.Api.DataModel.Entities.Product", b =>
+                {
+                    b.OwnsOne("Verdant.Zero.Erp.Api.DataModel.Entities.Dimension", "Dimension", b1 =>
+                        {
+                            b1.Property<int>("ProductId");
+
+                            b1.Property<double>("Height");
+
+                            b1.Property<double>("Length");
+
+                            b1.Property<double>("Weight");
+
+                            b1.Property<double>("Width");
+
+                            b1.HasKey("ProductId");
+
+                            b1.ToTable("Products");
+
+                            b1.HasOne("Verdant.Zero.Erp.Api.DataModel.Entities.Product")
+                                .WithOne("Dimension")
+                                .HasForeignKey("Verdant.Zero.Erp.Api.DataModel.Entities.Dimension", "ProductId")
+                                .OnDelete(DeleteBehavior.Cascade);
+                        });
+
+                    b.OwnsOne("Verdant.Zero.Erp.Api.DataModel.Entities.InventoryAccount", "InventoryAccount", b1 =>
+                        {
+                            b1.Property<int>("Id");
+
+                            b1.Property<string>("Name");
+
+                            b1.Property<double>("OpeningStock");
+
+                            b1.Property<double>("OpeningStockValuePerUnit");
+
+                            b1.HasKey("Id");
+
+                            b1.ToTable("Products");
+
+                            b1.HasOne("Verdant.Zero.Erp.Api.DataModel.Entities.Product")
+                                .WithOne("InventoryAccount")
+                                .HasForeignKey("Verdant.Zero.Erp.Api.DataModel.Entities.InventoryAccount", "Id")
+                                .OnDelete(DeleteBehavior.Cascade);
+                        });
+
+                    b.OwnsOne("Verdant.Zero.Erp.Api.DataModel.Entities.PurchaseInformation", "PurchaseInformation", b1 =>
+                        {
+                            b1.Property<int>("ProductId");
+
+                            b1.Property<string>("Account");
+
+                            b1.Property<string>("Description");
+
+                            b1.Property<double>("PurchasePrice");
+
+                            b1.HasKey("ProductId");
+
+                            b1.ToTable("Products");
+
+                            b1.HasOne("Verdant.Zero.Erp.Api.DataModel.Entities.Product")
+                                .WithOne("PurchaseInformation")
+                                .HasForeignKey("Verdant.Zero.Erp.Api.DataModel.Entities.PurchaseInformation", "ProductId")
+                                .OnDelete(DeleteBehavior.Cascade);
+                        });
+
+                    b.OwnsOne("Verdant.Zero.Erp.Api.DataModel.Entities.SalesInformation", "SalesInformation", b1 =>
+                        {
+                            b1.Property<int>("ProductId");
+
+                            b1.Property<string>("Account");
+
+                            b1.Property<string>("Description");
+
+                            b1.Property<double>("SellingPrice");
+
+                            b1.HasKey("ProductId");
+
+                            b1.ToTable("Products");
+
+                            b1.HasOne("Verdant.Zero.Erp.Api.DataModel.Entities.Product")
+                                .WithOne("SalesInformation")
+                                .HasForeignKey("Verdant.Zero.Erp.Api.DataModel.Entities.SalesInformation", "ProductId")
+                                .OnDelete(DeleteBehavior.Cascade);
+                        });
                 });
 
             modelBuilder.Entity("Verdant.Zero.Erp.Api.DataModel.Entities.User", b =>

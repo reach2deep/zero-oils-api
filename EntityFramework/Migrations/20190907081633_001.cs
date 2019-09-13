@@ -49,6 +49,67 @@ namespace Verdant.Zero.Erp.Api.EntityFramework.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Inventories",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("MySQL:AutoIncrement", true),
+                    ProductCode = table.Column<int>(nullable: false),
+                    WarehouseCode = table.Column<string>(nullable: true),
+                    AccountingStockOnHand = table.Column<double>(nullable: false),
+                    AccountingStockAvailForSale = table.Column<double>(nullable: false),
+                    AccountingCommittedStock = table.Column<double>(nullable: false),
+                    PhysicalStockOnHand = table.Column<double>(nullable: false),
+                    PhysicalStockAvailForSale = table.Column<double>(nullable: false),
+                    PhysicalCommittedStock = table.Column<double>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Inventories", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Products",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("MySQL:AutoIncrement", true),
+                    CreatedBy = table.Column<string>(nullable: true),
+                    CreatedAt = table.Column<DateTime>(nullable: false),
+                    UpdatedBy = table.Column<string>(nullable: true),
+                    UpdatedAt = table.Column<DateTime>(nullable: false),
+                    ItemType = table.Column<string>(nullable: true),
+                    Name = table.Column<string>(nullable: true),
+                    Sku = table.Column<string>(nullable: true),
+                    Uom = table.Column<string>(nullable: true),
+                    IsReturnable = table.Column<byte>(type: "TINYINT(1)", nullable: false),
+                    Dimension_Length = table.Column<double>(nullable: false),
+                    Dimension_Width = table.Column<double>(nullable: false),
+                    Dimension_Height = table.Column<double>(nullable: false),
+                    Dimension_Weight = table.Column<double>(nullable: false),
+                    Manufacturer = table.Column<string>(nullable: true),
+                    Brand = table.Column<string>(nullable: true),
+                    Upc = table.Column<string>(nullable: true),
+                    Mpn = table.Column<string>(nullable: true),
+                    Ean = table.Column<string>(nullable: true),
+                    Isbn = table.Column<string>(nullable: true),
+                    SalesInformation_SellingPrice = table.Column<double>(nullable: false),
+                    SalesInformation_Account = table.Column<string>(nullable: true),
+                    SalesInformation_Description = table.Column<string>(nullable: true),
+                    PurchaseInformation_PurchasePrice = table.Column<double>(nullable: false),
+                    PurchaseInformation_Account = table.Column<string>(nullable: true),
+                    PurchaseInformation_Description = table.Column<string>(nullable: true),
+                    InventoryAccount_Name = table.Column<string>(nullable: true),
+                    InventoryAccount_OpeningStock = table.Column<double>(nullable: false),
+                    InventoryAccount_OpeningStockValuePerUnit = table.Column<double>(nullable: false),
+                    ImagePath = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Products", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "TaxAndPayments",
                 columns: table => new
                 {
@@ -194,6 +255,12 @@ namespace Verdant.Zero.Erp.Api.EntityFramework.Migrations
         {
             migrationBuilder.DropTable(
                 name: "Contacts");
+
+            migrationBuilder.DropTable(
+                name: "Inventories");
+
+            migrationBuilder.DropTable(
+                name: "Products");
 
             migrationBuilder.DropTable(
                 name: "Users");

@@ -73,6 +73,11 @@ namespace Verdant.Zero.Erp.Api
             services.AddTransient<IAccountManagementBusinessService>(provider =>
             new AccountManagementBusinessService(provider.GetRequiredService<IAccountManagementDataService>(), connectionStrings));
 
+            // Product
+            services.AddTransient<IProductManagementDataService, ProductManagementDataService>();
+            services.AddTransient<IProductManagementBusinessService>(provider =>
+            new ProductManagementBusinessService(provider.GetRequiredService<IProductManagementDataService>(), connectionStrings,provider.GetRequiredService<IMapper>()));
+
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
             {
                 options.TokenValidationParameters = new TokenValidationParameters

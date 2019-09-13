@@ -85,7 +85,7 @@ namespace Verdant.Zero.Erp.Api.Data.EntityFramework
 
             var query = dbConnection.Contacts.AsQueryable();
 
-            if (contactName.Trim().Length > 0)
+            if (!string.IsNullOrEmpty(contactName) && contactName.Trim().Length > 0 )
             {
                 query = query.Where(p => p.FirstName.Contains(contactName));
             }
