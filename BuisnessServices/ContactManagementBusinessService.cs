@@ -55,9 +55,9 @@ namespace Verdant.Zero.Erp.Api.Data.Buisness
                 }
 
                 contact = _mapper.Map<Contact>(contactDataTransformation);
-                contact.BillingAddress = _mapper.Map<Address>(contactDataTransformation.billing_address);
-                contact.ShippingAddress = _mapper.Map<Address>(contactDataTransformation.shipping_address);
-                contact.TaxAndPaymentDetail = _mapper.Map<TaxAndPaymentDetails>(contactDataTransformation.tax_payment_detail);
+                contact.BillingAddress = _mapper.Map<Address>(contactDataTransformation.billingAddress);
+                contact.ShippingAddress = _mapper.Map<Address>(contactDataTransformation.shippingAddress);
+                contact.TaxAndPaymentDetail = _mapper.Map<TaxAndPaymentDetails>(contactDataTransformation.taxPaymentDetail);
                                
                 await _contactManagementDataService.CreateContact(contact);
 
@@ -169,9 +169,9 @@ namespace Verdant.Zero.Erp.Api.Data.Buisness
                 }
 
                 contact = _mapper.Map<Contact>(contactDataTransformation);
-                contact.BillingAddress = _mapper.Map<Address>(contactDataTransformation.billing_address);
-                contact.ShippingAddress = _mapper.Map<Address>(contactDataTransformation.shipping_address);
-                contact.TaxAndPaymentDetail = _mapper.Map<TaxAndPaymentDetails>(contactDataTransformation.tax_payment_detail);
+                contact.BillingAddress = _mapper.Map<Address>(contactDataTransformation.billingAddress);
+                contact.ShippingAddress = _mapper.Map<Address>(contactDataTransformation.shippingAddress);
+                contact.TaxAndPaymentDetail = _mapper.Map<TaxAndPaymentDetails>(contactDataTransformation.taxPaymentDetail);
 
                 await _contactManagementDataService.UpdateContact(contact);
 

@@ -126,7 +126,7 @@ namespace Verdant.Zero.Erp.Api
             app.UseSwagger();
             app.UseSwaggerUI(c => {
                 
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Test API V1");
+                c.SwaggerEndpoint("../swagger/v1/swagger.json", "Test API V1");
                 c.RoutePrefix = string.Empty;
             });
             

@@ -28,7 +28,7 @@ namespace Verdant.Zero.Erp.Api.Data.BusinessRules
 
         public async Task<ValidationResult> Validate()
         {
-            ValidateRequired("first_name", "First Name");
+            ValidateRequired("firstName", "First Name");
             //ValidateRequired("AddressLine1", "Address Line 1");
             //ValidateRequired("City", "City");
             //ValidateRequired("Region", "State/Region");
