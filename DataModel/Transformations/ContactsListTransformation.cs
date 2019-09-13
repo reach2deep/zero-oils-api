@@ -8,10 +8,10 @@ namespace Verdant.Zero.Erp.Api.DataModel.Transformations
 {
     public class ContactsListDataTransformation
     {
-        public int? contact_id { get; set; }
+        public int? contactId { get; set; }
         public string contact_type { get; set; }
         public string customer_type { get; set; }
-        public string contact_name { get; set; }
+        public string contactName { get; set; }
         public string salutation { get; set; }
         public string first_name { get; set; }
         public string last_name { get; set; }
@@ -28,7 +28,7 @@ namespace Verdant.Zero.Erp.Api.DataModel.Transformations
         public int? contact_id { get; set; }
         public string contact_type { get; set; }
         public string customer_type { get; set; }
-        public string contact_name { get; set; }
+        public string contactName { get; set; }
         public string salutation { get; set; }
         public string first_name { get; set; }
         public string last_name { get; set; }

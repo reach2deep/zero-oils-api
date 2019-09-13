@@ -50,7 +50,7 @@ namespace Verdant.Zero.Erp.Api.DataModel.Mappings
                .ForMember(dest => dest.contact_id, opt => opt.MapFrom(src => src.ContactId))
                .ForMember(dest => dest.contact_type, opt => opt.MapFrom(src => src.ContactType))
                .ForMember(dest => dest.customer_type, opt => opt.MapFrom(src => src.CustomerType))
-               .ForMember(dest => dest.contact_name, opt => opt.MapFrom(src => src.FirstName + src.LastName))
+               .ForMember(dest => dest.contactName, opt => opt.MapFrom(src => src.FirstName + src.LastName))
                .ForMember(dest => dest.salutation, opt => opt.MapFrom(src => src.Salutation))
                .ForMember(dest => dest.first_name, opt => opt.MapFrom(src => src.FirstName))
                .ForMember(dest => dest.last_name, opt => opt.MapFrom(src => src.LastName))
